@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD con Autenticación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido</h1>
+
+        <!-- Sección de Inicio de Sesión -->
+        <div id="loginSection">
+            <h2>Iniciar Sesión</h2>
+            <input type="text" id="usernameLogin" placeholder="Nombre de usuario" required>
+            <p id="loginError" style="color: red; display: none;">Usuario no encontrado.</p>
+            <button id="loginBtn">Ingresar</button>
+            <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+        </div>
+
+        <!-- Sección de Usuario (se oculta hasta que se autentique) -->
+        <div id="userSection" style="display: none;">
+            <h2>Bienvenido, <span id="userName"></span></h2>
+            <button id="logoutBtn">Cerrar Sesión</button>
+            <h3>Tus Datos:</h3>
+            <ul id="userData"></ul>
+            <button id="addPostBtn">Añadir Post</button>
+        </div>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
