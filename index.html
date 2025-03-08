@@ -22,12 +22,20 @@
         <!-- Sección de Usuario (se oculta hasta que se autentique) -->
         <div id="userSection" style="display: none;">
             <h2>Bienvenido, <span id="userName"></span></h2>
-            <button id="logoutBtn">Cerrar Sesión</button>
+
             <h3>Tus Datos:</h3>
             <ul id="userData"></ul>
+
+            <!-- Contenedor de publicaciones -->
+            <div id="userPostsContainer">
+                <h3>Tus Publicaciones:</h3>
+                <ul id="userPostsList"></ul>
+            </div>
+
+            <!-- 🔹 Los botones AHORA están al final, debajo de los posts -->
             <button id="addPostBtn">Añadir Post</button>
+            <button id="logoutBtn">Cerrar Sesión</button>
         </div>
-        
     </div>
 
     <script src="script.js"></script>

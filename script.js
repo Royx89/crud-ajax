@@ -3,16 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const userSection = document.getElementById("userSection");
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
+    const addPostBtn = document.getElementById("addPostBtn");
     const userNameSpan = document.getElementById("userName");
     const userDataList = document.getElementById("userData");
-    const userPostsList = document.createElement("ul"); // Lista para los posts
-    userSection.appendChild(userPostsList); // Agregamos la lista a la sección del usuario
+    const userPostsList = document.getElementById("userPostsList");
 
-    const addPostBtn = document.createElement("button"); // Botón "Añadir Post"
-    addPostBtn.textContent = "Añadir Post";
-    addPostBtn.id = "addPostBtn";
-    userSection.appendChild(addPostBtn); // Agregar botón a la sección del usuario
-
+    // Recuperar usuario si ya está autenticado
     let user = localStorage.getItem("user");
     if (user) {
         user = JSON.parse(user);
@@ -50,13 +46,12 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 
-    // Manejar cierre de sesión
+    // Cerrar sesión
     logoutBtn.addEventListener("click", function () {
         localStorage.removeItem("user");
         location.reload();
     });
 
-    // Mostrar usuario autenticado
     function mostrarUsuario(user) {
         loginSection.style.display = "none";
         userSection.style.display = "block";
@@ -67,13 +62,15 @@ document.addEventListener("DOMContentLoaded", function () {
             <li>Nombre: ${user.name}</li>
         `;
 
+        // Limpiar la lista antes de añadir nuevas publicaciones
+        userPostsList.innerHTML = "";
+
         // Obtener y mostrar los posts del usuario
         fetch(`http://localhost:5000/posts?userId=${user.id}`)
             .then(response => response.json())
             .then(posts => {
-                userPostsList.innerHTML = "<h3>Tus Publicaciones:</h3>";
                 if (posts.length === 0) {
-                    userPostsList.innerHTML += "<p>No tienes publicaciones aún.</p>";
+                    userPostsList.innerHTML = "<p>No tienes publicaciones aún.</p>";
                 } else {
                     posts.forEach(post => {
                         userPostsList.innerHTML += `
@@ -87,9 +84,4 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error("Error al cargar los posts:", error));
     }
-
-    // Redirigir a la página de añadir post
-    addPostBtn.addEventListener("click", function () {
-        window.location.href = "post.html";
-    });
 });
